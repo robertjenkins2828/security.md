@@ -330,6 +330,14 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     Server-Side query executed would appear like this:
     SELECT id FROM users WHERE name=‘tom' OR 1='1’ AND pass=‘tom' OR 1='1’
 
+    **change this from a post to a get using developer tools**
+    1. open network tab, send the credentials again
+    2. hit the request tab on the right hand side
+    3. set a value in the url -> set the value in the request field to raw
+    4. copy and paste that value into the url with a ? after the php
+    5. view page source
+    
+
 
 
     
