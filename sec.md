@@ -266,7 +266,7 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
     Additional commands added by vendors
     Relational
 
-    Standard Commands
+    Standard Commands (SQL)
     SELECT - Extracts data from a database
     UNION - Used to COMBINE the result-set of TWO OR MORE SELECT STATEMENTS
     USE - Selects the DB to use
@@ -280,6 +280,32 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
     DROP TABLE - Deletes a table
     CREATE INDEX - Creates an index (search key)
     DROP INDEX - Deletes an index
+
+    **default SQL databases** - to view -> mysql -> show databases; 
+    information_schema
+    mysql
+    performance_schema
+    session (not default)
+
+    *to see tables in SQL*
+    ex:
+    show TABLES FROM session
+    Tires
+    car
+
+    *to see columns in a table*
+    ex:
+    show columns from session.Tires;
+    show columns from session.car;
+
+    **see information in the columns**
+    select tireid,name,cost,size session.Tires;
+    select year,name,cost from session.car;
+
+    **use union to combine outputs**
+    ex:
+    select year,name,cost from session.car UNION select name,size,cost from session.Tires;
+    
     
 
     
