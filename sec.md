@@ -258,7 +258,31 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
 
     **to ssh with someones private key**
         ssh -i id_rsa www-data@10.50.30.162 (to use a specific private key, replace 'id_rsa' with whatever you saved it as)
-        
+
+## Web Exploitation Day 2
+
+    SQL
+    S tructured Q uery L anguage - ANSI Standard
+    Additional commands added by vendors
+    Relational
+
+    Standard Commands
+    SELECT - Extracts data from a database
+    UNION - Used to COMBINE the result-set of TWO OR MORE SELECT STATEMENTS
+    USE - Selects the DB to use
+    UPDATE - Updates data in a database
+    DELETE - Deletes data from a database
+    INSERT INTO - Inserts new data into a database
+    CREATE DATABASE - Creates a new database
+    ALTER DATABASE - Modifies a database
+    CREATE TABLE - Creates a new table
+    ALTER TABLE - Modifies a table
+    DROP TABLE - Deletes a table
+    CREATE INDEX - Creates an index (search key)
+    DROP INDEX - Deletes an index
+    
+
+    
         
         
         
