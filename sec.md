@@ -380,6 +380,9 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     ex 2:
     ttp://10.50.28.178/uniondemo.php?Selection=2 UNION select session_id,user_id,remote_ip FROM session.session_log
 
+    **To find a version of SQL server**
+    UNION select 1,2,@@version
+
     
     
     
