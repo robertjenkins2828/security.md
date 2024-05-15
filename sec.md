@@ -260,6 +260,7 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
         ssh -i id_rsa www-data@10.50.30.162 (to use a specific private key, replace 'id_rsa' with whatever you saved it as)
 
 ## Web Exploitation Day 2
+https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-slides.html
 
     SQL
     S tructured Q uery L anguage - ANSI Standard
@@ -305,6 +306,34 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
     **use union to combine outputs**
     ex:
     select year,name,cost from session.car UNION select name,size,cost from session.Tires;
+
+    **SQL Injection - Considerations**
+    Requires Valid SQL Queries
+    Fully patched systems can be vulnerable due to misconfiguration
+    Input Field Sanitization
+    String vs Integer Values
+    Is INFORMATION_SCHEMA Database available?
+    GET Request versus POST Request HTTP methods
+
+    **Unsanitized vs Sanitized Fields**
+    Unsanitized: input fields can be found using a Single Quote ⇒ '
+        Will return extraneous information
+        ' closes a variable, to allow for additional statements/clauses
+        May show no errors or generic error (harder Injection)
+
+    Sanitized: input fields are checked for items that might harm the database (Items are removed, escaped, or turned into a single string)
+    Validation: checks inputs to ensure it meets a criteria (String doesn’t contain ')
+
+    Example - Injecting Your Statement
+    User enters TOM' OR 1='1 in the name and pass fields
+    Truth Statement: tom ' OR 1='1
+    Server-Side query executed would appear like this:
+    SELECT id FROM users WHERE name=‘tom' OR 1='1’ AND pass=‘tom' OR 1='1’
+
+
+
+    
+    
     
     
 
