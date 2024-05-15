@@ -243,7 +243,7 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
     Run the following to chain/stack our arbitrary command
         ; cat /etc/passwd
 
-    **SSH Key upload**
+## SSH Key upload 
         check /etc/passwd for interactive shell
         generate an ssh key. 
         ls -la (.ssh folder is hidden)
@@ -337,7 +337,7 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     4. copy and paste that value into the url with a ? after the php
     5. view page source
 
-    **SQL on database** POST Method
+## SQL on database POST Method
     http://10.50.28.178/Union.html
     Ford
     Dodge
@@ -360,7 +360,7 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     ex 2:
     Audi' Union select id,2,name,pass,5 FROM session.user #
 
-    **SQL on database** GET Method
+## SQL on database GET Method
     ex for this one is selecting something from a dropdown menu
     Pay attention to URL bar, it should change for each selection
 
