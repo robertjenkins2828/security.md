@@ -384,6 +384,72 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     UNION select 1,2,@@version
 
 ## Reverse Engineering
+https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/06-reverse-engineering.html
+
+    **X86_64 Assembly**
+        16 general purpose 64-bit registers.
+        %rax - the first return register
+        %rbp - the base pointer that keeps track of the base of the stack
+        %rsp - the stack pointer that points to the top of the stack
+
+            You will see arguments passed to functions as something like: [%ebp-0x8]
+
+        **X86_64 Assembly - Common Terms**
+        HEAP - Memory that can be allocated and deallocated
+        STACK - A contiguous section of memory used for passing arguments
+        GENERAL REGISTER - A multipurpose register that can be used by either programmer or user to store data or a memory location address
+        CONTROL REGISTER - A processor register that changes or controls the behavior of a CPU
+        FLAGS REGISTER - Contains the current state of the processor
+
+        **There is one instruction pointer register that points to the memory offset of the next instruction in the code segment:**
+        64 bit    lower 32 bits    lower 16 bits    description
+        RIP        EIP              IP              instruction point; holds address
+                                                    for next instruction to be run.
+
+        **X86_64 Assembly - Common Instruction Pointers**
+        MOV - move source to destination
+        PUSH - push source onto stack
+        POP - Pop top of stack to destination
+        INC - Increment source by 1
+        DEC - Decrement source by 1
+        ADD - Add source to destination
+        SUB - Subtract source from destination
+        CMP - Compare 2 values by subtracting them and setting the %RFLAGS register. ZeroFlag set means they are the same.
+        JMP - Jump to specified location
+        JLE - Jump if less than or equal
+        JE - Jump if equal
+
+    **DEMO1**
+        1.main:
+        2.    mov rax, 16 (#16 moved into rax)
+        3.    push rax (#push value of rax (16) onto stack)
+        4.    jmp mem2
+        5.
+        6.mem1:
+        7.    mov rax, 0 (move 0 (error free) exit code to rax)
+        8.    ret (return out of code)
+        9.
+        10.mem2:
+        11.    pop r8 (# pop value on the stack (16)into r8.)
+        12.    cmp rax, r8 (#compare rax register value (16) to r8 register value (16)
+        13.    je mem1
+        
+    **DEMO2**
+        1.main:
+        2.    mov rcx, 25 (store the value 25 in rcx register)
+        3.    mov rbx, 62 (store the value of 62 in rbx register)
+        4.    jmp mem1
+        5.
+        6.mem1:
+        7.    sub rbx, 40 (subtract 40 from rbx(22)
+        8.    mov rsi, rbx (copy rbx value (22) to rsi)
+        9.    cmp rcx, rsi (compare values in rcx and rsi)
+        10.   jmple mem2 (jump if less than equal)
+        11.
+        12.mem2:
+        13.    mov rax, 0 (store 0 (error free/success) in rax)
+        14.    ret
+        
 
     
 
