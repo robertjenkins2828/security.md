@@ -383,6 +383,10 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     **To find a version of SQL server**
     UNION select 1,2,@@version
 
+## Reverse Engineering
+
+    
+
     
     
     
