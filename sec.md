@@ -417,7 +417,7 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/06-reverse-engineer
         CMP - Compare 2 values by subtracting them and setting the %RFLAGS register. ZeroFlag set means they are the same.
         JMP - Jump to specified location
         JLE - Jump if less than or equal
-        JE - Jump if equal
+        JE - Jump if equal (uses %RFLAGS register, relies on zero flag)
 
     **DEMO1**
         1.main:
@@ -499,7 +499,37 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/06-reverse-engineer
         5. Document and save the tools, scripts, code, methods used to analyze the software to better
             analyze related software in the future.
         6. Document proof of concept for exploitation of the binary if it is found to be vulnerable and a potential target. For example, if the binary is running on an adversary network, or if a friendly network may be using the binary.
+
+## Portable Executable Patching / Software Analysis
+
+    Perform DEBUGGING and DISASSEMBLY
+    Find the SUCCESS/FAILURE
+    Adjust INSTRUCTIONS
+    Apply Patch and Save
+    Execute Patched Binary
+
+## Patching demo
+
+    open in Ghidra as normal -> search strings, find function etc.
+    check left side, and start looking through instructions
+    in this demo, 13555 is what the function was looking for to print success
+    CPM     EAX,13555 is visible on the left pane
+    Right click 13555 -> patch instruction -> change to EAX,EAX (this will compare user input to user input and return true *returning success*)
+    export program -> change to PE (if its a .exe/or on windows)
     
+
+## reverse engineering workflow
+
+    if windows:
+        check properties, details, etc
+        interact w/ program
+        check source code if you have it
+        atoi - takes a string and turns it into an integer
+        if you don't have source code, open Ghidra -> open the executable in ghidra
+        analyse the code, search for strings if you have some
+    
+        
+        
 
     
     
