@@ -527,6 +527,64 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/06-reverse-engineer
         atoi - takes a string and turns it into an integer
         if you don't have source code, open Ghidra -> open the executable in ghidra
         analyse the code, search for strings if you have some
+
+## Exploit Development
+https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
+
+    **Buffer Overflow Common Terms**
+        HEAP - Memory that can be allocated and deallocated
+        STACK - A contiguous section of memory used for passing arguments
+        REGISTERS - Storage elements as close as possible to the central processing unit (CPU)
+        INSTRUCTION POINTER (IP) - a.k.a Program Counter (PC), contains the address of next instruction to be executed
+        STACK POINTER (SP) - Contains the address of the next available space on the stack
+        BASE POINTER (BP) - The base of the stack
+        FUNCTION - Code that is separate from the main program that is often used to replace code the repeats in order to make the program smaller and more efficient
+        SHELLCODE - The code that is executed once an exploit successfully takes advantage of a vulnerability
+
+       **Buffer Overflow Defenses**
+            Non executable (NX) stack
+            Address Space Layout Randomization (ASLR)
+            Data Execution Prevention (DEP)
+            Stack Canaries
+            Position Independent Executable (PIE)
+
+    **GDB Uses**
+        disass <FUNCTION>   #   Disassemble portion of the program
+        info <...>  #   Supply info for specific stack areas
+        x/256c $<REGISTER>  #   Read characters from specific register
+        break <address>  #   Establish a break point
+
+## Web Exploitation Demo
+
+    1. ensure its saved in /home/student
+    2. chmod u+x it
+    3. run file on it, run strings on it
+    4. ./func (or whatever its name is) to run it
+    5. ./func $(echo "sdflkjsdflkjsdfflksjdflksjdf") see if it takes arguments
+    6. ./func <<<$(echo "sdflkjsdflkjsdfflksjdflksjdf") Takes the output of the echo command and redirects it as input into the executable.
+    7. enter a lot more characters to see if we get something
+    8. create python script (lin_buf.py)
+        #!/usr/bin/env python
+        buffer = "A" * 40 
+        print(buffer)
+        
+    9. ./func <<<(./lin_buf.py)
+    10. increase chars in script until segmentation fault
+    11. then run 'gdb ./func'
+    12. run - allows you to run it the exe in gdb. info functions - shows you functions in the program. disass main - to see main function. pdisass main (to see it more better)
+    13. in gdb -> run <<<$(./lin_buf.py)
+    https://wiremask.eu/tools/buffer-overflow-pattern-generator/
+    14. copy the value in wiremask, do run<<<$(echo "value")
+    15. copy the value in the instruction pointer.
+    16. go back to wiremask, paste that offset in the register value. (this should tell you the amount of characters you need to send in the script)
+    
+    
+    
+    
+    
+    
+
+    
     
         
         
