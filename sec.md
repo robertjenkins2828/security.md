@@ -598,6 +598,8 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
     34. change eip to the little endian of your first stack location.
     35. change print statement to include nop and buf
     36. then go to linops terminal and run -> ./func <<<$(./lin_buf.py)
+
+    (if it doesnt work, regenerate shell code, change EIP, check print statement, make sure you're just using 'python')
     
     
     
