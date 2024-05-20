@@ -568,7 +568,7 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
         buffer = "A" * 40 
         print(buffer)
         
-    9. ./func <<<(./lin_buf.py)
+    9. ./func <<<$(./lin_buf.py)
     10. increase chars in script until segmentation fault
     11. then run 'gdb ./func'
     12. run - allows you to run it the exe in gdb. info functions - shows you functions in the program. disass main - to see main function. pdisass main (to see it more better)
@@ -580,8 +580,8 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
     17. note the offset value, go back into script and change your buffer to that number.
     18. create eip in your script -> eip = "B" * 4 -> print(buffer+eip)
     19 in gdp -> run <<<$(./lin_buf.py)
-    20. quit out of GDB. reenter gdb with 'env -gdb ./func' -> then show env -> need to get rid of these environmental variables. run 'unset env COLUMNS / LINES'
-    21. run the executable again to get it to crash in order to figure out locations of ESP
+    20. quit out of GDB. reenter gdb with 'env - gdb ./func' -> then show env -> need to get rid of these environmental variables. run 'unset env COLUMNS / LINES'
+    21. run the executable again to get it to crash in order to figure out locations of ESP / or run normally and interupt with ctrl c
     22. enter a bunch of stuff 
     23. then run 'info proc map' shows processes memory mapping. location of heap/stack/text of executable
     24. the start is the startaddr right below the heap. the end is the end addr of the stack.
@@ -602,9 +602,16 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
     (if it doesnt work, regenerate shell code, change EIP, check print statement, make sure you're just using 'python' , on target machine -> put this in /tmp)
 
     **MSFvenom one liner** 'msfvenom -p linux/x86/exec CMD="whoami && ifconfig" -b '\x00' -f python
+
+    SCP through a tunnel syntax 
+    scp -P 1111 lin_buf1.py comrade@127.0.0.1:/home/comrade
     
     
-    
+    find /b 0xf7def000, 0xffffe000, 0xff, 0xe4
+    0xf7df1b51
+    0xf7f6674b
+    0xf7f72753
+
     
     
     
