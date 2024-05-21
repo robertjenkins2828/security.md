@@ -607,11 +607,21 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-7-exploit_sg.html
     scp -P 1111 lin_buf1.py comrade@127.0.0.1:/home/comrade
     
     
-    find /b 0xf7def000, 0xffffe000, 0xff, 0xe4
-    0xf7df1b51
-    0xf7f6674b
-    0xf7f72753
+## Windows Buffer Overflow
+https://z3r0th.medium.com/a-simple-buffer-overflow-using-vulnserver-86b011eb673b
 
+    1. attempt to run malware
+    2. nmap -Pn -sT -T5 --script=banner 10.50.34.195 (from linops to see what ports opened on winops)
+    3. 9999 was open, so we used nc '10.50.34.195 9999'
+    4. made win_buf.py script to interact w/ ip and port 9999
+    5. go back to winops, open immunity -> file -> attach -> attach the .exe, just pay attention to the cpu thread window here.
+    6. click the play button in the top left -> send your script again.
+    7. find out how many bytes we have to send to overwrite it -> modify buf in script to vulnerable command, add 'buf += "A" * 100', keep modifying the 100 value until it breaks.
+    8. once broken, go into wiremask and copy the value you used into length. -> then copy and paste the pattern into your script in the buf += part.
+    9. run the script with the new buf, copy and paste the EIP as the register value in wiremask to find the offset.
+    10. go back into your script. delete the pattern you put in buf +=, and add the offset value you got from wiremask.
+    11. add another buf += "B" * 4
+    12.
     
     
     
