@@ -631,7 +631,79 @@ https://z3r0th.medium.com/a-simple-buffer-overflow-using-vulnserver-86b011eb673b
     
     
     
-    625012A0
+## Post Exploitation
+https://sec.cybbh.io/public/security/latest/lessons/lesson-8-post_sg.html
+
+     **SSH Overview**
+        Access remote systems using an SSH server as a proxy
+        Securely transfer files
+        Execute commands on a remote system
+        VPN using the SSH protocol as a transport
+        Forwarding the X Window System display to the client system
+
+    **Linux Targets**
+        local port fwd:
+            -L <USER PORT ON LOCAL>:TARGETHOST:TARGETPORT
+        remote port fwd:
+            ssh USER@<PIVOT IP> -R <REMOTE PORT ON PIVOT>:TARGETHOST:TARGETPORT
+
+    **SSH Keys**
+        SSH keys are asymetric(public/private) key pairs that can be used to authenticate a user to a system in combination with or to replace the use of a password
+        If you are able to find a users private ssh key it can potentially be used to gain access to other systems
+
+    **Using Stolen SSH Keys**
+    Bring private key to your own box
+    On your box:
+        chmod 600 /home/student/stolenkey
+        ssh -i /home/student/stolenkey jane@1.2.3.4
+
+    **Control Sockets**
+    benefits provided include:
+        multiplexing
+        data exfiltration
+        less logging
+
+    **Control Sockets (config)**
+        command line method:
+            ssh -M -S /tmp/s root@<IP ADDRESS> <TUNNEL COMMANDS -R or -L>
+            ssh -S /tmp/s x@x
+            scp -o 'ControlPath=/tmp/s' x@x:<Path>
+        Configuration File Method (~/.ssh/ssh_config)
+            HostName *
+            ControlPath ~/.ssh/controlmasters/%r@%h:%p
+            ControlMaster auto
+            ControlPersist 10m
+
+    **Local host enumeration**
+        windows: net user
+        linux: cat /etc/passwd
+
+        Process enumeration:
+            win: tasklist /v
+            linux: ps -elf
+
+        Service enumeration:
+            win: tasklist /svc
+            linux: chkconfig
+                    systemctl --type=service
+        
+        Network Connection Enumeration
+            win: ipconfig /all
+            linux: ifconfig -a or ip a
+
+        **Data Exfiltration**
+        
+        
+            
+        
+    
+
+
+            
+
+        
+
+    
     
     
     
