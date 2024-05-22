@@ -324,7 +324,7 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/05-sql-injection-sl
     Sanitized: input fields are checked for items that might harm the database (Items are removed, escaped, or turned into a single string)
     Validation: checks inputs to ensure it meets a criteria (String doesn’t contain ')
 
-    Example - Injecting Your Statement
+    Example - Injecting Your Statement -> do this if you see a login box. (use ; in front of your commands)
     User enters TOM' OR 1='1 in the name and pass fields
     Truth Statement: tom' OR 1='1
     Server-Side query executed would appear like this:
@@ -676,7 +676,7 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-8-post_sg.html
 
     **Local host enumeration**
         windows: net user
-        linux: cat /etc/passwd | cat /etc/hosts (first thing you do on linux box)
+        linux: cat /etc/passwd | cat /etc/hosts (first thing you do on linux box/name resolution)
         linux: /etc/crontab(system created) | /var/spool/cron/crontabs (user created)
 
         Process enumeration:
@@ -693,6 +693,14 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-8-post_sg.html
             win: ipconfig /all
             linux: ifconfig -a or ip a
 
+    **SCP help**
+    scp <source> <destination> 
+    
+    ## from local to remote
+    scp file user@10.10.10.10:/path/to/file 
+    
+    ## scp through a tunnel (sending file.txt to our working directory)
+    scp -P 1111 user@127.0.0.1:/path/to/file.txt .
         
         
         
