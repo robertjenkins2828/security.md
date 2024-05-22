@@ -676,7 +676,8 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-8-post_sg.html
 
     **Local host enumeration**
         windows: net user
-        linux: cat /etc/passwd
+        linux: cat /etc/passwd | cat /etc/hosts (first thing you do on linux box)
+        linux: /etc/crontab(system created) | /var/spool/cron/crontabs (user created)
 
         Process enumeration:
             win: tasklist /v
@@ -686,12 +687,13 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-8-post_sg.html
             win: tasklist /svc
             linux: chkconfig
                     systemctl --type=service
+            ps -p 1 (tell the diff between systemd and sysV | init = sysV, or systemd
         
         Network Connection Enumeration
             win: ipconfig /all
             linux: ifconfig -a or ip a
 
-        **Data Exfiltration**
+        
         
         
             
