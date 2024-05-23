@@ -4,6 +4,7 @@ un: XTRA1-502-M
 pw: LL45pMsynOCsDnm	
 stack: 19
 ip: 10.50.29.176
+xfreerdp /u:student /v:10.50.34.195 /dynamic-resolution +glyph-cache +clipboard (use this command to get into the system)
 
 ## New tunneling method
 
@@ -701,6 +702,63 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-8-post_sg.html
     
     ## scp through a tunnel (sending file.txt to our working directory)
     scp -P 1111 user@127.0.0.1:/path/to/file.txt .
+
+##Privilege Escalation, Persistence & Covering Your Tracks
+Windows
+https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/09-windows-priv-persist-cover.html
+
+    **Modes & Levels**
+        Kernel Mode vs User Mode
+        Privileged vs Unprivileged
+
+    **Windows Access Control Model**
+    Access Tokens
+        Security Identifier (SID) associations and Token associations
+    Security Descriptors -> identify who did what using SIDs
+        DACL
+        SACL
+        ACEs
+
+    **DLL Search Order**
+    Executables check the following locations (in successive order):
+
+    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs
+    The directory the the Application was run from *** important ***
+    The directory specified in in the C+ function GetSystemDirectory()
+    The directory specified in the C+ function GetWindowsDirectory()
+    The current directory
+
+    **Windows Integrity Mechanism**
+    Integrity Levels
+        UNTRUSTED - Anonymous SID access tokens
+        LOW - Everyone SID access token (World)
+        MEDIUM - Authenticated Users
+        HIGH - Administrators
+        SYSTEM - System services (LocalSystem, LocalService, NetworkService)
+
+    **User Account Control (UAC)**
+    Always Notify
+    Notify me only when programs try to make changes to my computer
+    Notify me only when programs try to make changes to my computer (do not dim my desktop)
+    Never notify
+
+    **DEMO: Checking UAC Settings**
+    reg query HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
+
+    **AutoElevate Executables**
+    Requested Execution Levels:
+        asInvoker
+        highestAvailable
+
+    
+    
+    
+    
+    
+    
+    
+
+        
         
         
         
