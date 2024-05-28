@@ -808,6 +808,45 @@ https://sec.cybbh.io/-/public/-/jobs/870086/artifacts/slides/09-windows-priv-per
     net use z: "\\http://live.sysinternals.com" /persistent:yes 
     
     msfvenom to copy contents of desktop -> msfvenom -p windows/exec CMD='cmd.exe /C "xcopy C:\Users\Admin\Desktop C:\Users\comrade.WIN2-INTERNAL-D\Desktop\ /s"' -f dll > hijackmeplz.dll
+
+
+## Linux Exploitation / Privilege escalation
+https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.html
+
+    **Objectives**
+    Adding or hijacking a user account
+    Implementing boot process persistence
+    Adding or modifying a CRON job
+    Additional methods outside the scope of the SG
+
+    **Privilege escalation**
+    **run sudo -l** when ya get on a box to see what you can run.
+    **can escalate** opening sudo vim /etc/ssh/sshd_config, then :!sh to gain root access. (that file is an example, can be any file you can sudo vim into.)
+    can do the same thing as above w "sudo less /etc/ssh/sshd_config"
+    more examples of these at: https://gtfobins.github.io/
+
+    **Sudo file config** -> in /etc/sudoers
+    %sudo ALL=(ALL:ALL) ALL -> on all hosts, anyone in this group / user can sudo as all users and all groups to execute all commands. % means its a group, no % is user.
+    ex:
+    murphy ALL=/usr/bin/halt,/usr/bin/poweroff,/usr/bin/reboot
+    This rule allows user murphy to run /usr/bin/halt, /usr/bin/poweroff and /usr/bin/reboot as root.
+
+    **SUID/SGID** -> for the user or group that owns the file. 
+    ls -l /usr/bin/passwd
+    -rwsr-xr-x 1 root root 59640 Nov 29  2022 /usr/bin/passwd
+    This has the SUID bit turned on. 
+
+    Find all files w/ the SUID bit turned on:
+        find / -type f -perm /4000 -ls 2>/dev/null
+
+    
+    
+    
+    
+
+    
+    
+
     
     
     
