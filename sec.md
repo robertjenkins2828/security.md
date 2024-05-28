@@ -965,7 +965,7 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
     
 
     
-    
+    ghjcnbnenrf      (zeus)
         
         
     
