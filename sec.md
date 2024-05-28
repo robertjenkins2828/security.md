@@ -839,6 +839,110 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
     Find all files w/ the SUID bit turned on:
         find / -type f -perm /4000 -ls 2>/dev/null
 
+    Find all files w/ the SGID bit turned on:
+        find / -type f -perm /2000 -ls 2>/dev/null
+
+    Find all files w/ SUID & SGID turned on:
+        find / -type f -perm /6000 -ls 2>/dev/null
+
+    Check what is returned against GTFObins to see what you can exploit. 
+
+    **Insecure Permissions**
+    CRON
+    World-Writable Files and Directories
+    Dot '.' in PATH
+
+    **CRON**
+    /etc/cron.d .daily, .hourly .weekly .monthly .weekly (etc ones are system level crons)
+    /var/spool/cron/crontabs/student (or whoever created it) -> user created crons.
+    -e to edit crontab, -l to list crontab, -u specify the user, -r remove crontab
+    crontab.guru to check cron job times. ex: crontab -e
+
+    **World-Writable Files and Folders** -> file that anyone can write into
+    ex: /tmp & /var/tmp
+
+    World writable files and directories can be identified with the following command:
+        find / -type f -perm /2 -o -type d -perm /2 2>/dev/null # Search for any file or directory that is writable by the context "other" 
+
+    To find files and directories that you have the ability to write to, use the command:
+    find / -type f -writable -o -type d -writable 2>/dev/null
+
+    demo: find / -type f -o -type d -perm /2 2>/dev/null (find writable files)
+    demo: find / -type d -perm /2 2>/dev/null (just finds writable directories)
+
+    **Dot '.' in PATH**
+    echo $PATH
+
+    **Vulnerable Software and Services**
+
+    **Persistence**
+    
+    **Adding or Hijacking a User Account**
+    
+    **Covering your tracks**
+    Artifacts - anything youll leave behind.
+    logs/users/opening files etc.
+    unset HISTFILE
+
+    Check init type -> ps -p 1
+
+    **Logs for Covering Tracks** -> run ls -latr for these guys.
+    logs typically housed in /var/log & useful logs:       
+    auth.log/secure - Logins/authentications
+    lastlog - Each users' last successful login time
+    btmp - Bad login attempts
+    sulog - Usage of SU command
+    utmp - Currently logged in users (W command)
+    wtmp - Permanent record on user on/off
+
+    **Cleaning The Logs**
+    Before we start cleaning, save the INODE!
+    Affect on the inode of using mv VS cp VS cat
+    Know what we are removing (Entry times? IP? Whole file? Etc.)
+
+    **Cleaning The Logs (Precise)**
+    GREP (remove):
+        egrep -v '10:49*| 15:15:15' auth.log > auth.log2; cat auth.log2 > auth.log; rm auth.log2
+
+    SED (replace):
+        cat auth.log > auth.log2; sed -i 's/10.16.10.93/136.132.1.1/g' auth.log2; cat auth.log2 > auth.log
+
+    **Timestomp (Nix)**
+    touch -c -t 201603051015 1.txt   # Explicit
+    touch -r 3.txt 1.txt    # Reference
+
+    **Remote Logging**
+    Main one is RSYSLOG -> check the config file in order to indentify where logs are being sent, and which ones are being sent.
+
+    Rsyslog -> newer rsyslog references /etc/rsyslog.d/* for settings/rules
+    older version only uses /etc/rsyslog.conf
+    ex:
+        kern.*                                                # All kernel messages, all severities
+        mail.crit
+        cron.!info,!debug
+        *.*  @192.168.10.254:514     (1 @ = udp, 2 @@'s = tcp)                       # Old format
+        *.* action(type="omfwd" target="192.168.10.254" port="514" protocol="udp")   # New format
+        #mail.*
+    
+    
+        
+        
+    
+    
+
+    
+    
+
+    
+        
+    
+    
+
+    
+    
+        
+        
+
     
     
     
