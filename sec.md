@@ -227,7 +227,7 @@ https://sec.cybbh.io/-/public/-/jobs/866153/artifacts/slides/04-web-exploitation
 
     **Malicious File Upload**
     Site allows unsanitized file uploads
-
+    https://sec.cybbh.io/public/security/latest/lessons/lesson-4-        xss_sg.html#_demo_malicious_file_upload
     Server doesn’t validate extension or size
     Allows for code execution (shell)
     Once uploaded
@@ -987,7 +987,68 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
         
     
     
-
+## Dry run notes:
+    
+    - nmap starting IP address.
+        nmap -Pn -T4 *start ip*
+    - we noticed port 22 and 80 open.
+        nmap -Pn -T4 --script=banner,http-enum.nse *start ip*
+        do this to ensure ports are what they say they are, and enumerate http.
+    - port 80 was open, so we'll open Firefox and navigate to that site.
+        first thing on new site, scroll up and down and click on stuff.
+        open everything in new tabs. 
+        we see three different links, they all lead to the same page.
+        we notice an input box where we can exploit.
+        we notice a box where we can upload a file. (malicious php file)
+        we notice a user login page.
+        we saw the scripts directory from our nmap script. -> click on that and find creds.
+    - we saw that we could click on the login box. use sql injection like bob' or 1='1
+        to see info.
+            open developer console, capture the traffic. change the post request to raw, add a question mark after the php, paste the raw request after it. then view page source.
+    - decode encoded passwords using Cyberchef
+    - if you see file to read, think DIRECTORY TRAVERSAL
+        go back to the input box, and check ../../../../etc/hosts, /etc/passwd etc.
+    - in /etc/hosts -> we see the IP address to what we can assume is the next pivot.
+    - use creds you found to SSH into the back end of the start ip.
+    - Once you get on a box, things you should do ->
+        cat /etc/hosts, /etc/passwd etc. | ip neigh | ruby pingsweep
+    - used ping sweep and found two ip's we could reach from that machine.
+        so create a dynamic, and nmap those ip's you found.
+    - results of nmap scan returned port 22,80 open on one of the ip's
+        and returned 22 on another.
+        if you see port 80 open, use the http enum script.
+    - create your tunnels to reach the ports on these machines.
+        close your dynamic. 
+        create your port forwards to those ip's / ports.
+    - check out whatever's being hosted on that port 80. 
+        its a SQL server! with options you can check.
+        when you get on one of these, start to "fuzz"
+        pick.php?product=1 OR 1=1; (do this on all of them) we find #7 is vulnerable.
+        once you find the vulnerable one, use something like
+        product=7 union select 1,2,3; 
+        move on to golden statement.
+        product=7 union select table_schema,column_name,table_name from information_schema.columns
+        three defaults to ignore: information_schema, mysql, performance_schema.
+        dump specific: UNION SELECT name,username,user_id FROM siteusers.users;
+        this returns login credentials.
+        you might see something that says -> what date was this thing purchased?
+    - attempt to ssh to the next box that we saw above using creds found on SQL server.
+        use ruby ping sweep again to scan the same network from that box to see if that box can see something the other box couldn't.
+    **the round sensor box wanted us to privilege escalate**
+        we run sudo -l, and we can run /usr/bin/find. 
+        check GTFObins and see what we can do with find.
+        copy the sudo find priv esc thing from gtfobins and run it. escalated.
+    - we created another dynamic and nmap scan the next box. its a windows box with 3389/9999 open.
+        we banner grab 9999 port, and see that its secure server.
+    - go ahead and open tunnels to the ports that you think you're going to need.
+        9999, 3389 etc.
+        Because 9999 is open, we can use our overflow script that we created previously.
+        because we've used this before, we'll have to change the IP / port that we're sending it to. It'll be through our loopback on whatever tunnel we connected to 9999.
+        
+        
+    
+    
+        
     
     
         
