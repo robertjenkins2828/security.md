@@ -1094,8 +1094,14 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
         - GDB to disassemble and look at linux binaries. (if you see GDB, dissassemble a binary)
         - pdisass main (to look at main function) or disass if you don't have peda.
         - we see a function, pdisass 'name of function' to see it.
-        - red is a vulnerable function! google name of function + buffer overflow vulnerability 
-        
+        - red is a vulnerable function! google name of function + buffer overflow vulnerability
+
+    **windows persistence**
+        - registry
+        - schtasks (task scheduler)
+        - services
+
+    
         
 
     
