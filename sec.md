@@ -1071,6 +1071,10 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
         - then ; cat /var/www/.ssh/authorized_keys (to make sure it uploaded)
         - then ssh into the box. ssh -i id_rsa www-data@10.50.32.44
         **you might find a private key hidden in a directory somewhere** if you do, save this key and name it something, go to that directory, then use the ssh -i command to ssh in as that user (with their username)
+
+    **exe replacement**
+        - try to rename, create a file etc.
+        
         
 
     
