@@ -7,7 +7,7 @@ ip: 10.50.29.176
 xfreerdp /u:student /v:10.50.34.195 /dynamic-resolution +glyph-cache +clipboard (use this command to get into the system)
 
 ## New tunneling method
-
+facility
     ssh -MS /tmp/grey student@10.50.25.150 
     **creates a socket in the /tmp directory that hosts info from that IP**
     **to get rid of this, ssh -MS /tmp/grey -O cancel student@10.50.25.150**
