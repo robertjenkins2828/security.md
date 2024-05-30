@@ -1074,6 +1074,27 @@ https://sec.cybbh.io/public/security/latest/lessons/lesson-10-linux-exploit_sg.h
 
     **exe replacement**
         - try to rename, create a file etc.
+
+    **post ex**
+         - check /etc/crontab, /var/spool
+         - /etc/shadow, /etc/passwd, /etc/hosts
+
+    **priv esc**
+        - sudo -l
+        - check GTFObins for vulnerable stuff. Also check SUID / SGID stuff.
+
+    **remote logging (rsyslog)**
+        - /etc/rsyslog.d/* | /etc/rsyslog.conf 
+
+    **binary analysis, reverse engineering, RE**
+        - we get a file, need to figure out how it works. run 'file' on it. if you see ELF, think linux.
+        - behavioural analysis, figure out how it takes information. ./func <<< $(echo "assdflsk")
+        - we don't always need the carrots, carrots send it as user input.
+        - gdb ./func -> run
+        - GDB to disassemble and look at linux binaries. (if you see GDB, dissassemble a binary)
+        - pdisass main (to look at main function) or disass if you don't have peda.
+        - we see a function, pdisass 'name of function' to see it.
+        - red is a vulnerable function! google name of function + buffer overflow vulnerability 
         
         
 
