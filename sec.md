@@ -1,7 +1,7 @@
 linops: 10.50.36.204
 Winops: 10.50.34.195
-un: XTRA1-502-M
-pw: LL45pMsynOCsDnm	
+un: LUMC-502-M
+pw: FICkFYNeOmskl07	
 stack: 19
 ip: 10.50.29.176
 xfreerdp /u:student /v:10.50.34.195 /dynamic-resolution +glyph-cache +clipboard (use this command to get into the system)
