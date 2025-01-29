@@ -1,10 +1,5 @@
-linops: 10.50.36.204
-Winops: 10.50.34.195
-un: LUMC-502-M
-pw: FICkFYNeOmskl07	
-stack: 19
-ip: 10.50.38.134
-xfreerdp /u:student /v:10.50.34.195 /dynamic-resolution +glyph-cache +clipboard (use this command to get into the system)
+
+xfreerdp /u:student /v:1.1.1.1 /dynamic-resolution +glyph-cache +clipboard (use this command to get into the system)
 
 ## New tunneling method
 facility
